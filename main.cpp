@@ -1,3 +1,4 @@
+#include <clocale>
 #include "Time.h"
 
 int main()
@@ -6,7 +7,7 @@ int main()
 	Time t1;
 	Time t2(0, 0, 10);
 	Time t3("02:30:00");
-
+	std::string a;
 	t2 = t3;
 	std::cout <<"Пример работы функции ToString:   "<< t2.ToString() << std::endl;
 
