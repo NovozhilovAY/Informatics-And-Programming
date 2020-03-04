@@ -6,8 +6,8 @@ int main()
 	setlocale(LC_CTYPE, "Russian");
 	Time t1;
 	Time t2(0, 0, 10);
-	Time t3("02:30:00");
-	std::string a;
+	Time t3("02:30:00"); 
+
 	t2 = t3;
 	std::cout <<"Пример работы функции ToString:   "<< t2.ToString() << std::endl;
 
