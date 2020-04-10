@@ -33,6 +33,8 @@ public:
 	void change(std::string word, std::string transl);
 	void translate(std::string word);
 	int get_num_w();
+	friend std::ostream& operator<<(std::ostream& os, const Dictionary& d);
+	friend std::istream& operator>>(std::istream& os, Dictionary& d);
 };
 
 std::string language(std::string str);

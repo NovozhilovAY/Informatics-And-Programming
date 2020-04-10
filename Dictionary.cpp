@@ -225,6 +225,32 @@ int Dictionary::get_num_w()
 	return num_w;
 }
 
+std::ostream & operator<<(std::ostream & os, const Dictionary & d)
+{
+	os << std::endl << "English" << "\t" << "Russian" << std::endl << std::endl;
+	for (int i = 0; i < d.num_w; i++)
+	{
+		os << d.dictionary[i].eword << "\t" << d.dictionary[i].rword << std::endl;
+	}
+	os << std::endl;
+	return os;
+}
+
+std::istream & operator>>(std::istream & os, Dictionary & d)
+{
+	
+	while (std::getline(os, d.dictionary[d.num_w].eword, ' ') && d.num_w < d.len_d)
+	{
+		while (std::getline(os, d.dictionary[d.num_w].rword, '\n'))
+		{
+			break;
+		}
+		d.num_w++;
+		break;
+	}
+	return os;
+}
+
 std::string language(std::string str)
 {
 	if (str[0] >= 'A' && str[0] <= 'Z' || str[0] >= 'a' && str[0] <= 'z')

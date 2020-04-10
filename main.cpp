@@ -1,6 +1,5 @@
 #include "Dictionary.h"
 
-
 int main()
 {
 	setlocale(LC_ALL, "Russian");
@@ -11,7 +10,7 @@ int main()
 	a.add("cat", "кот");
 	a.add("brother", "брат");
 	a.add("sister", "сестра");
-	a.print();
+	std::cout << a;
 	std::cout << "пример использования функции изменения перевода указанного слова:" << std::endl;
 	a.change("cat", "кошечка");
 	a.change("кошечка", "kitty");
@@ -51,7 +50,10 @@ int main()
 	std::cout << std::endl << "пример чтения словаря из файла:" << std::endl << std::endl;
 	Dictionary c;
 	c.open("test.txt");
-	c.print();
+	std::cout << c;
+	std::cin >> c;
+	std::cout << c;
+
 	system("pause");
 	return 0;
 }
