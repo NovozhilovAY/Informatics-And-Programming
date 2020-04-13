@@ -80,9 +80,9 @@ int main()
 		mm1 = mm1 + mm2;
 		mm1.print();
 	}
-	catch (const char* ex)
+	catch (std::logic_error &ex)
 	{
-		std::cout << ex << std::endl;
+		std::cerr << ex.what() << std::endl;
 	}
 
 	try
@@ -91,9 +91,9 @@ int main()
 		mm1 = mm1 + mm3;
 		mm1.print();
 	}
-	catch (const char* ex)
+	catch (std::logic_error &ex)
 	{
-		std::cout << ex << std::endl;
+		std::cerr << ex.what() << std::endl;
 	}
 
 	Matrix mm11(2);
@@ -115,9 +115,9 @@ int main()
 		mm11 = mm11 * mm22;
 		mm11.print();
 	}
-	catch (const char* ex)
+	catch (std::logic_error &ex)
 	{
-		std::cout << ex << std::endl;
+		std::cerr << ex.what() << std::endl;
 	}
 
 	try
@@ -126,9 +126,9 @@ int main()
 		mm11 = mm11 * mm33;
 		mm11.print();
 	}
-	catch (const char* ex)
+	catch (std::logic_error &ex)
 	{
-		std::cout << ex << std::endl;
+		std::cerr << ex.what() << std::endl;
 	}
 
 
@@ -148,9 +148,9 @@ int main()
 		std::cout << "matrix после изменения элемента = " << std::endl;
 		matrix.print();
 	}
-	catch (const char* ex)
+	catch (std::out_of_range &ex)
 	{
-		std::cout << ex << std::endl;
+		std::cerr << ex.what() << std::endl;
 	}
 	
 

@@ -111,7 +111,7 @@ Matrix Matrix::operator+(const Matrix & _matrix) const
 {
 	if (size != _matrix.size)
 	{
-		throw "Нельзя складывать матрицы разного размера!!!\n";
+		throw std::logic_error("Ошибка : матрицы нельзя сложить!");
 	}
 	else
 	{
@@ -131,7 +131,7 @@ Matrix Matrix::operator*(const Matrix & _matrix) const
 {
 	if (size != _matrix.size)
 	{
-		throw "Матрицы умножить нальзя!!!\n";
+		throw std::logic_error("Ошибка : матрицы нельзя умножить!");
 	}
 	else
 	{
@@ -169,7 +169,7 @@ int& Matrix::operator()(int index1, int index2)
 {
 	if (index1 >= size || index1 < 0 || index2 >= size || index2 < 0)
 	{
-		throw "Выход за границу массива!";
+		throw std::out_of_range("Ошибка : Выход за границу массива!");
 	}
 	return matrix[index1][index2];
 }
