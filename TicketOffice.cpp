@@ -33,6 +33,103 @@ void TicketOffice::start()
 		case 1:
 			break;
 		case 2:
+			system("cls");
+			cinema.print_schedule();
+			continue;
+		case 3:
+			system("cls");
+			now_date = set_prestnt_date();
+			now_time = set_present_time();
+			pos = cinema.find_seance(now_date, now_time);
+			if (pos.i == -1)
+			{
+				std::cout << "Таких сеансов не найдено" << std::endl;
+				continue;
+			}
+			else
+			{
+				cinema.show_seance(pos.i, pos.j);
+				seance_menu();
+				std::cin >> answer;
+
+				if (answer == 1)
+				{
+					std::cout << "Введите количество билетов: ";
+					std::cin >> num_t;
+					std::cout << "Введите тип зоны(0 - обчная, 1 - VIP): ";
+					std::cin >> type_z;
+					system("cls");
+					if (cinema.chech_free_places(pos, type_z, num_t))
+					{
+						cinema.take_free_plases(pos, type_z, num_t);
+						cinema.show_seance(pos.i, pos.j);
+						std::cout << "\n Общая стоимость выбранных билетов: " << cinema.price_tickets(pos) << " руб.\n";
+						buy_menu();
+						std::cin >> answer;
+						system("cls");
+						if (answer == 1)
+						{
+							cinema.print_tickets(pos);
+							cinema.buy_places(pos);
+							continue;
+						}
+						if (answer == 2)
+						{
+							cinema.cancel_take(pos);
+							continue;
+						}
+					}
+					else
+					{
+						std::cout << "\nНедостаточно свободных мест!\n";
+						continue;
+					}
+				}
+				if (answer == 2)
+				{
+					std::cout << "Введите количество билетов: ";
+					std::cin >> num_t;
+					std::cout << "Введите тип зоны(0 - обчная, 1 - VIP): ";
+					std::cin >> type_z;
+					system("cls");
+					if (cinema.chech_free_places(pos, type_z, num_t))
+					{
+						cinema.take_free_plases(pos, type_z, num_t);
+						cinema.show_seance(pos.i, pos.j);
+						std::cout << "\n Общая стоимость выбранных билетов: " << cinema.price_tickets(pos) << " руб.\n";
+						res_menu();
+						std::cin >> answer;
+						system("cls");
+						if (answer == 1)
+						{
+
+							cinema.reserv_places(pos);
+							continue;
+						}
+						if (answer == 2)
+						{
+							cinema.cancel_take(pos);
+							continue;
+						}
+					}
+					else
+					{
+						std::cout << "\nНедостаточно билетов!\n";
+						continue;
+					}
+				}
+				if (answer == 3)
+				{
+					system("cls");
+					break;
+				}
+				if (answer == 4)
+				{
+					system("cls");
+					continue;
+				}
+			}
+		case 4:
 			return;
 		}
 		while (true)
@@ -179,7 +276,10 @@ void TicketOffice::main_menu()
 {
 	std::cout << "~~~~~~~~~~~ Билетная касса ~~~~~~~~~~~\n\n";
 	std::cout << "1.Выбрать сеанс\n";
-	std::cout << "2.Выйти из программы\n\n";
+	std::cout << "2.Показать расписание на сегодня\n";
+	std::cout << "3.Купить билет на сеанс, который начался не более 10 минут назад.\n";
+	std::cout << "4.Выйти из программы\n\n";
+
 	std::cout << "Выберите нужный вариант: ";
 }
 

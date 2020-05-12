@@ -1,6 +1,6 @@
 #include "Hall.h"
 #include "Seance.h"
-
+//#include "TicketOffice.h"
 #include <iostream>
 #include <locale>
 #include <string>
@@ -38,6 +38,7 @@ public:
 	Hall* get_halls();
 	void set_seanses_from_file(std::string file_name);
 	Coord find_seance(Date d, Time t, std::string n, int ind_hall);
+	Coord find_seance(Date d, Time t);
 	bool chech_free_places(Coord c, int type, int num);
 	void take_free_plases(Coord c, int type, int num);
 	void buy_places(Coord c);
@@ -45,7 +46,7 @@ public:
 	void cancel_take(Coord c);
 	int price_tickets(Coord c);
 	void print_tickets(Coord c);
-
+	void print_schedule();
 };
 
 int strToInt(std::string str);

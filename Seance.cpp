@@ -355,3 +355,21 @@ void Seance::print()
 	hall.print();
 	std::cout << std::endl;
 }
+
+void Seance::print_all()
+{
+	std::cout << "Название фильма: " << name <<std::endl;
+	std::cout << "Дата: " << date.ToStr() << std::endl;
+	std::cout << "Время: " << time.ToStr() << std::endl;
+	std::cout << "Номер зала: " << ind_hall << std::endl;
+	std::cout << "Стоимость обычного билета: " << cost_ticket << " руб." << std::endl;
+	std::cout << "Стоимость VIP билета: " << cost_vip_ticket << " руб." << std::endl;
+	std::cout << std::endl;
+}
+
+Date Seance::get_date()
+{
+	return date;
+}
+
+

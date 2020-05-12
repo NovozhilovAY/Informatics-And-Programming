@@ -32,7 +32,7 @@ public:
 class Time
 {
 	friend Seance;
-
+	
 	int min;
 	int hour;
 public:
@@ -65,4 +65,8 @@ public:
 	Seance(const Seance& c);
 	Seance& operator=(const Seance& c);
 	void print();
+	void print_all();
+	Date get_date();
 };
+Time set_present_time();
+Date set_prestnt_date();

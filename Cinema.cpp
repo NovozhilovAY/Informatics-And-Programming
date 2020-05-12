@@ -208,6 +208,26 @@ Coord Cinema::find_seance(Date d, Time t, std::string n, int ind_hall)
 	return c;
 }
 
+Coord Cinema::find_seance(Date d, Time t)
+{
+	Coord c;
+	c.i = -1;
+	c.j = -1;
+	for (int i = 0; i < 30; i++)
+	{
+		for (int j = 0; j < 8 * num_halls; j++)
+		{
+			if (seanses[i][j].date == d && (seanses[i][j].time < t && t < seanses[i][j].time + 10))
+			{
+				c.i = i;
+				c.j = j;
+				return c;
+			}
+		}
+	}
+	return c;
+}
+
 bool Cinema::chech_free_places(Coord c, int type, int num)
 {
 	int count = 0;
@@ -373,6 +393,23 @@ void Cinema::print_tickets(Coord c)
 				std::cout << "Ðÿה: " << seanses[c.i][c.j].hall.all_rows - i << std::endl;
 				std::cout << "Ìוסעמ: " << j+1 << std::endl;
 			}
+		}
+	}
+}
+
+void Cinema::print_schedule()
+{
+	Date d = set_prestnt_date();
+	int count = 0;
+	for (int i = 0;count<num_seanses; i++)
+	{
+		for (int j = 0; j < 8 * num_halls && count < num_seanses; j++)
+		{
+			if (seanses[i][j].get_date() == d)
+			{
+				seanses[i][j].print_all();
+			}
+			count++;
 		}
 	}
 }

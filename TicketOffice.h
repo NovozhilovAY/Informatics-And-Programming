@@ -13,5 +13,3 @@ private:
 	void buy_menu();
 	void res_menu();
 };
-Time set_present_time();
-Date set_prestnt_date();
