@@ -45,38 +45,61 @@ int ListLoopLen(std::list<int>& list, std::_List_node<int, void*>* node)
 	return count;
 }
 
-std::_List_node<int, void*>* FindLoop2(std::list<int>& list) //переворот указателей
+bool hasLoop(std::list<int>& list) {
+	bool answer;
+	std::_List_node<int, void*>* previousNode = nullptr;
+	std::_List_node<int, void*>* currentNode = list.begin()._Ptr;
+	std::_List_node<int, void*>* startNode = list.begin()._Ptr;
+	std::_List_node<int, void*>* nextNode = nullptr;
+	if (!currentNode->_Next) return false;
+	while (currentNode != list.end()._Ptr && currentNode) {
+		nextNode = currentNode->_Next;
+		currentNode->_Next = previousNode;
+		previousNode = currentNode;
+		currentNode = nextNode;
+	}
+	if (previousNode == startNode)
+	{
+		answer = true;
+		previousNode = nullptr;
+		currentNode = list.begin()._Ptr;
+		startNode = list.begin()._Ptr;
+		while (currentNode != list.end()._Ptr && currentNode) {
+			nextNode = currentNode->_Next;
+			currentNode->_Next = previousNode;
+			previousNode = currentNode;
+			currentNode = nextNode;
+		}
+	}
+	else
+	{
+		answer = false;
+		currentNode = previousNode;
+		previousNode = nullptr;
+		while (previousNode != startNode)
+		{
+			nextNode = currentNode->_Next;
+			currentNode->_Next = previousNode;
+			previousNode = currentNode;
+			currentNode = nextNode;
+		}
+	}
+	
+	return answer;
+}
+
+std::_List_node<int, void*>* findFirstNodeOfLoop(std::list<int>& list, int loop_len)
 {
-	if (list.begin() == list.end())
+	std::_List_node<int, void*>* answer;
+	int node_pos = list.size()- 1 - loop_len;
+	int counter = 0;
+	auto iter = list.begin();
+	while (counter < node_pos)
 	{
-		return nullptr;
+		iter++;
+		counter++;
 	}
-	auto first = list.begin();
-	auto prev = list.begin();
-	auto cur = ++list.begin();
-	auto next = ++(++list.begin());
-	std::_List_node<int, void*>* answer = nullptr;
-	int steps = 0;
-	while (true)
-	{
-		if (cur._Ptr->_Next == nullptr || next._Ptr==nullptr)
-		{
-			return nullptr;
-		}
-		if (cur._Ptr->_Next == first._Ptr)
-		{
-			break;
-		}
-		if (prev._Ptr == next._Ptr)
-		{
-			answer = cur._Ptr;
-		}
-		cur._Ptr->_Next = prev._Ptr;
-		prev._Ptr = cur._Ptr;
-		cur._Ptr = next._Ptr;
-		next._Ptr = next._Ptr->_Next;
-		steps++;
-	}
+	return iter._Ptr;
 }
 
 int main()
@@ -110,7 +133,15 @@ int main()
 	}
 	else
 	{
-		std::cout << "Цикл есть! Кол-во звеньев - " << ListLoopLen(list,FindLoop1(list)) <<std::endl;
+		std::cout << "Цикл есть! Значение - " << FindLoop1(list)->_Myval<< "Кол - во звеньев -" << ListLoopLen(list,FindLoop1(list)) << " Первое звено цикла - "<< findFirstNodeOfLoop(list, ListLoopLen(list, FindLoop1(list)))->_Myval<<std::endl;
+	}
+	if (hasLoop(list))
+	{
+		std::cout << "Есть цикл!\n";
+	}
+	else
+	{
+		std::cout << "Нет цикла!\n";
 	}
 	return 0;
 }
